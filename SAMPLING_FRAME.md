@@ -66,12 +66,14 @@ The evaluation set cleanly separates calibration benchmarks from the confirmator
 ### B. Confirmatory High-Documentation Control (`CONFIRMATORY_HIGH_DOC_CONTROL`) (G-2, G-4)
 - **Specification:** Pinned by [`artifacts/sampling_frame/scientific_data_pool_spec.json`](artifacts/sampling_frame/scientific_data_pool_spec.json).
 - **Frozen Crossref Response:** [`artifacts/sampling_frame/scientific_data_crossref_raw.json`](artifacts/sampling_frame/scientific_data_crossref_raw.json) (36 total items).
-- **Frozen Eligibility Adjudication:** [`artifacts/sampling_frame/scientific_data_eligibility.tsv`](artifacts/sampling_frame/scientific_data_eligibility.tsv) (all 36 items explicitly classified; exactly 7 items verified `IN_SCOPE` for rechargeable lithium-ion cycling).
-- **Frozen Candidates TSV:** [`artifacts/sampling_frame/scientific_data_candidates.tsv`](artifacts/sampling_frame/scientific_data_candidates.tsv) (7 in-scope items ranked deterministically by selection score).
+- **Frozen Eligibility Adjudication:** [`artifacts/sampling_frame/scientific_data_eligibility.tsv`](artifacts/sampling_frame/scientific_data_eligibility.tsv) (SHA-256: `0f0bbbbff910fbcb22d19f691751861ad3b282eed1c77193a6e440389618bd59`).
+  - All 36 items explicitly classified: **4 `IN_SCOPE`**, **3 `INSUFFICIENT_METADATA_TO_CLASSIFY`**, **29 `OUT_OF_SCOPE`**.
+  - **Index-Layer Finding:** 3 of 36 records (8.3%) omit critical domain signals (chemistry or test regime) from title metadata, requiring abstain disposition under strict pre-freeze rules.
+- **Frozen Candidates TSV:** [`artifacts/sampling_frame/scientific_data_candidates.tsv`](artifacts/sampling_frame/scientific_data_candidates.tsv) (SHA-256: `f4299bfed812cd55446fe182b6d233b4a89a21fa9a23a465a2a29b56032bb89f`) (4 in-scope items ranked deterministically by selection score).
 - **Comprehensive Artifact Checksums:** Verified against [`artifacts/sampling_frame/SHA256SUMS`](artifacts/sampling_frame/SHA256SUMS).
-- **Candidate Pool:** 7 verified peer-reviewed Data Descriptors published in *Nature Scientific Data* (ISSN `2052-4463`) under rechargeable lithium-ion battery cycling/aging.
 - **Mandatory Exclusion:** Chung et al. (2021) is strictly barred from the candidate pool.
-- **Deterministic Selection:** The top-ranked in-scope entry in `scientific_data_candidates.tsv` (`10.1038/s41597-025-05725-y`) becomes `CONFIRMATORY_HIGH_DOC_CONTROL` upon freeze ratification.
+- **Deterministic Selection:** The top-ranked in-scope entry in `scientific_data_candidates.tsv` (`10.1038/s41597-024-03831-x` — *Comprehensive battery aging dataset: capacity and impedance fade measurements of a lithium-ion NMC/C-SiO cell*) becomes `CONFIRMATORY_HIGH_DOC_CONTROL` upon freeze ratification.
+- **Limitation Notice:** Requiring the title to prove both chemistry and regime selects datasets with explicit titles, potentially correlating with documentation care; it is not an unconstrained random draw from all descriptors. Target datasets from Table 2 do not share this constraint.
 - **Blindness Invariant:** Target repository contents, time-series data files, and README assets of the selected candidate remain strictly unopened prior to execution.
 
 ---

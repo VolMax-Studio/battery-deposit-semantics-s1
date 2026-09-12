@@ -45,3 +45,13 @@ This document preregisters all prior exposure, preliminary observations, analyst
 - **Detected By:** External Gate (G-4) & Reviewers.
 - **Prior Exposure:** The initial 36-item Crossref candidate pool was inspected, revealing non-lithium entries (zinc-oxygen, zinc-air) and string collision on `recycling`, with Dongmo et al. at Rank 1.
 - **Epistemic Invariant:** High-doc control selection is **prospective with respect to deposit repository contents**, but **not blind with respect to candidate-pool composition**. The revised eligibility adjudication (`scientific_data_eligibility.tsv`) was designed after pool exposure to explicitly restrict candidate selection to empirical rechargeable lithium-ion datasets.
+
+### F-PF-04: Reviewer Candidate Pre-Assertion & Strict Metadata Demotion
+- **Detected By:** External Gate Reviewer.
+- **Prior Exposure:** During Gate review, three candidate DOIs (`10.1038/s41597-025-06229-5`, `10.1038/s41597-024-03859-z`, `10.1038/s41597-024-03831-x`) were asserted by the reviewer as explicitly proving both lithium-ion chemistry and cycling degradation from title text alone.
+- **Resolution & Demotion:** Applied strict title-only evidentiary rule without external knowledge injection:
+  - 3 candidate titles lacking explicit proof of both criteria (`10.1038/s41597-025-05725-y`, `10.1038/s41597-023-02180-5`, `10.1038/s41597-026-07857-1`) were demoted to `INSUFFICIENT_METADATA_TO_CLASSIFY`.
+  - A fourth candidate (`10.1038/s41597-022-01217-5`) also proved both criteria from title text (`LiNi0.70Co0.15Mn0.15O2`, `long-term cycling`).
+  - Total `IN_SCOPE` candidates: 4.
+  - Deterministic hash selection over the sealed in-scope population selected `10.1038/s41597-024-03831-x` as `CONFIRMATORY_HIGH_DOC_CONTROL`.
+

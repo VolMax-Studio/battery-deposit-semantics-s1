@@ -12,23 +12,27 @@
   "raw_response_artifact": "artifacts/sampling_frame/scientific_data_crossref_raw.json",
   "raw_response_sha256": "854f7da7770d68a564b31a2b242d22d103b31b205c928bb13c84225c3ee8c83f",
   "eligibility_tsv_artifact": "artifacts/sampling_frame/scientific_data_eligibility.tsv",
-  "eligibility_tsv_sha256": "c2d9daf3cb12a140b5ca159566708326a5434eb79802da055aff9796971f867f",
+  "eligibility_tsv_sha256": "0f0bbbbff910fbcb22d19f691751861ad3b282eed1c77193a6e440389618bd59",
   "candidates_tsv_artifact": "artifacts/sampling_frame/scientific_data_candidates.tsv",
-  "candidates_tsv_sha256": "e75fed70f0c88e37525c90d1be03c899a6e7da58be3e42d0ebb11e2e1d44bd32",
+  "candidates_tsv_sha256": "f4299bfed812cd55446fe182b6d233b4a89a21fa9a23a465a2a29b56032bb89f",
   "total_items_retrieved": 36,
-  "eligible_in_scope_count": 7,
+  "eligibility_counts": {
+    "IN_SCOPE": 4,
+    "INSUFFICIENT_METADATA_TO_CLASSIFY": 3,
+    "OUT_OF_SCOPE": 29
+  },
   "mandatory_exclusions": [
     "10.1038/s41597-021-00954-3"
   ],
-  "eligibility_protocol": {
-    "rule": "Every single item of the 36 retrieved Crossref records is classified into IN_SCOPE, OUT_OF_SCOPE, or INSUFFICIENT_METADATA_TO_CLASSIFY based on verified title and domain",
-    "in_scope_criterion": "Empirical cycling/aging/degradation dataset of rechargeable lithium-ion cells or packs",
-    "out_of_scope_criterion": "Non-lithium chemistry, non-cycling datasets (LCA, recycling, surveys, computation), or non-battery domains"
+  "strict_title_evidentiary_rule": {
+    "in_scope_criterion": "Frozen title must explicitly prove BOTH: (a) lithium-ion chemistry AND (b) cycling/aging/degradation dataset",
+    "insufficient_metadata_criterion": "Title specifies lithium-ion or battery but does not prove both conditions from frozen text alone (no unverified external inferences permitted)",
+    "out_of_scope_criterion": "Non-lithium chemistry, non-cycling datasets, or non-battery domains"
   },
   "deterministic_selection_algorithm": {
     "score_formula": "SHA256('battery-deposit-semantics-s1|confirmatory-control|' + lower(strip(DOI)))",
-    "ranking": "ascending lexicographical by selection_score over IN_SCOPE entries",
-    "selection": "Top-ranked entry in candidates TSV (10.1038/s41597-025-05725-y) becomes CONFIRMATORY_HIGH_DOC_CONTROL upon freeze ratification"
+    "ranking": "ascending lexicographical by selection_score over the 4 IN_SCOPE entries",
+    "selection": "Top-ranked entry in candidates TSV (10.1038/s41597-024-03831-x) becomes CONFIRMATORY_HIGH_DOC_CONTROL upon freeze ratification"
   },
-  "blindness_invariant": "Dataset repository contents, time-series data files, and README assets of the selected DOI remain strictly unopened prior to execution."
+  "blindness_invariant": "Dataset repository contents, time-series data files, and README assets of the selected candidate DOI remain strictly unopened prior to execution."
 }
