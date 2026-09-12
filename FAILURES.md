@@ -30,3 +30,20 @@
   1. Formalized observation unit as unique canonical deposit location (`lower(strip(Location with weblink))`). Instituted sampling without replacement at observation-unit level: Rank 1 selected (`TRI [71, URL]` / `[72]`), Rank 2 skipped as `SAME_DEPOSIT_LOCATION_DUPLICATE`, and next eligible entry with distinct observation unit (`KIT [86, URL]` / `[8]`) selected as `CONFIRMATORY_TARGET_2`.
   2. Aligned High-Doc scope criterion to strictly require empirical cycling/aging/degradation of rechargeable lithium-ion cells or packs, reclassifying `10.1038/s41597-022-01217-5` to `OUT_OF_SCOPE` (in-scope count updated from 4 to 3; Rank 1 invariant: `10.1038/s41597-024-03831-x`).
   3. Recomputed and synchronized all affected artifacts and authoritative checksums.
+
+## F-005: Execution Sequencing Inversion & Acquisition Limitations Disclosures
+- **Date:** 2026-09-12
+- **Severity:** Execution Protocol & Acquisition Integrity (Intercepted Post-Freeze)
+- **Description:**
+  1. **Sequencing Inversion:** Confirmatory Level-0 deposit accession (`evidence/confirmatory/`, commit `fbe609d`) was conducted prior to executing the `CALIBRATION_POSITIVE` feasibility test (Chung 2021). Under `INSTRUMENT.md` §5.A, Chung calibration is an explicit gateway whose failure triggers `INSTRUMENT_INVALID` and immediate execution abort.
+  2. **Acquisition Artifact Limitations:**
+     - KIT secondary landing encountered a transient DNS resolution failure, resulting in an empty response (`e3b0...`, 0 bytes) stored in custody.
+     - TRI pinned Tier-1 asset (`data.matr.io`) returns a JavaScript application shell via raw HTTP, which does not convey rendered documentary text.
+     - Nature Scientific Data primary landing query returned a cookie notice parameter (`?error=cookies_not_supported...`).
+  3. **Shared Platform Dependency:** High-Doc control (`10.1038/s41597-024-03831-x`) and Target 2 (`KIT [86]`) both utilize RADAR4KIT repositories, introducing a shared documentation infrastructure constraint across 2 of 3 confirmatory units.
+- **Resolution:**
+  1. Confirmatory semantic evaluation (P1–P6) is strictly halted. The next execution step is redirected exclusively to `CALIBRATION_POSITIVE` (Chung 2021) to confirm instrument validity before any confirmatory dossiers are opened.
+  2. The empty KIT secondary artifact is retained strictly as custody evidence of an acquisition failure, with explicit prohibition against its use as positive documentary evidence.
+  3. Pinned acquisition for TRI is formally governed: client-side rendering of the exact pinned Tier-1 URL is permitted to inspect text, but failures of unrendered text cannot be scored as `NOT_FOUND_IN_PINNED_SPACE` without logging an acquisition failure.
+  4. Platform co-dependence between High-Doc and KIT is registered as an explicit cross-case analysis limitation.
+
