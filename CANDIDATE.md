@@ -1,34 +1,36 @@
-# Candidate Freeze Submission: battery-deposit-semantics-s1
+# Candidate Freeze Submission: battery-deposit-semantics-s1 (Round 1 Remediation)
 
 ## 1. Candidate Overview
 - **Instance:** `battery-deposit-semantics-s1`
-- **Submission Type:** Pre-Execution Preregistration Freeze Package
+- **Submission Type:** Pre-Execution Preregistration Freeze Package (Addressing B-1 through B-8)
 - **Governing Protocol:** P10 Strict Boundary Specification
 
 ---
 
-## 2. Pinned Artifact Inventory
-1. **Measurement Instrument:** [`INSTRUMENT.md`](INSTRUMENT.md)
-   - Defines the six export-semantics parameters derived from mathematical necessity for throughput / EFC reconstruction ($\int |I| dt$, $\sum Q_{\text{discharge}}$).
-   - Establishes the physical schema **Applicability Gate** prior to documentary adjudication.
-   - Pinned 3-Tier Search Space hierarchy and strict stopping rule.
-   - Standardized 14-day Uniform Depositor Correspondence Protocol.
-   - Falsifiable Instrument Validity Rule ($\{P1, P3\}$ must resolve on `CONFIRMATORY_POSITIVE`).
-   - Adjudicator Drift Control protocol with masked re-evaluation.
-2. **Sampling Protocol & Denominator:** [`SAMPLING_FRAME.md`](SAMPLING_FRAME.md)
-   - Authoritative denominator: dos Reis et al. (2021), *Energy and AI* 5, 100081, Table 2.
-   - Deterministic SHA-256 hash-sort algorithm for target dataset selection.
-   - Fixed sample size $n = 4$ (1 Calibration Positive, 1 Confirmatory Positive, 2 Confirmatory Targets).
-   - Attrition rule (`FRAME_ATTRITION`) preventing discretionary replacement.
-3. **Epistemic Disclosures:** [`PRE_FREEZE_EXPOSURE.md`](PRE_FREEZE_EXPOSURE.md)
-   - Full disclosure of Sandia inductive calibration history.
-   - Itemized pre-freeze assertions on Chung et al. (2021) and mandatory bar from confirmatory pool.
-   - Model citation interception log (F-PF-01 / F-001).
-4. **Execution Invariants:** [`PREREGISTRATION.md`](PREREGISTRATION.md) & [`STATUS.md`](STATUS.md)
-   - Zero target URL inspections executed pre-freeze (`target_deposit_inspections_pre_freeze: 0`).
-   - Execution state HALT.
+## 2. Remediation Inventory (B-1 through B-8)
+
+| Gate Finding | Remediation Action & Implementation | Primary Artifact |
+|---|---|---|
+| **B-1** | Pinned canonical sampling-frame object and machine-readable Table 2 population. | [`SAMPLING_FRAME.md`](SAMPLING_FRAME.md), `artifacts/sampling_frame/` |
+| **B-2** | Pinned exact metadata-only query specification and deterministic selection for `CONFIRMATORY_HIGH_DOC_CONTROL`. | [`scientific_data_pool_spec.json`](artifacts/sampling_frame/scientific_data_pool_spec.json) |
+| **B-3** | Decoupled instrument calibration (`CALIBRATION_POSITIVE`) from empirical control (`CONFIRMATORY_HIGH_DOC_CONTROL`); non-resolution on empirical control is a domain finding, not `INSTRUMENT_INVALID`. | [`INSTRUMENT.md`](INSTRUMENT.md) §5 |
+| **B-4** | Replaced universal mathematical necessity claim with explicit reconstruction pathways (Pathway A: continuous integration; Pathway B: cycle summary; Pathway C: cross-level reconciliation). | [`INSTRUMENT.md`](INSTRUMENT.md) §1 |
+| **B-5** | Generalized P4 to Temporal-Support Semantics (what timestamps represent across arbitrary schemas). | [`INSTRUMENT.md`](INSTRUMENT.md) §2 (P4) |
+| **B-6** | Strictly decoupled calibration cases ($n=2$) from the confirmatory analysis set ($n_{\text{confirmatory}} = 3$). | [`SAMPLING_FRAME.md`](SAMPLING_FRAME.md) §5, [`STATUS.md`](STATUS.md) |
+| **B-7** | Explicitly renamed same-analyst re-evaluation to Intra-Adjudicator Repeatability Test. | [`INSTRUMENT.md`](INSTRUMENT.md) §6 |
+| **B-8** | Symmetrically defined Tier-2 literature to include both canonical Table-2 `Paper Ref` and Tier-1 direct links. | [`INSTRUMENT.md`](INSTRUMENT.md) §3 |
 
 ---
 
-## 3. Request for Formal Gate Review
-This candidate package is submitted for formal Gate review prior to freeze ratification and target dataset selection.
+## 3. Pinned Artifact Inventory
+1. **Measurement Instrument:** [`INSTRUMENT.md`](INSTRUMENT.md)
+2. **Sampling Protocol & Denominator:** [`SAMPLING_FRAME.md`](SAMPLING_FRAME.md)
+3. **High-Documentation Pool Spec:** [`artifacts/sampling_frame/scientific_data_pool_spec.json`](artifacts/sampling_frame/scientific_data_pool_spec.json)
+4. **Epistemic Disclosures:** [`PRE_FREEZE_EXPOSURE.md`](PRE_FREEZE_EXPOSURE.md)
+5. **Execution Invariants & State:** [`PREREGISTRATION.md`](PREREGISTRATION.md) & [`STATUS.md`](STATUS.md)
+
+---
+
+## 4. Execution Invariants Maintained
+- Zero target deposit repository URLs opened pre-freeze (`target_deposit_inspections_pre_freeze: 0`).
+- Execution state HALT.

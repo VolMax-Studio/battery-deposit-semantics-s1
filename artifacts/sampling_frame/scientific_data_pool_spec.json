@@ -1,0 +1,22 @@
+{
+  "pool_id": "CONFIRMATORY_HIGH_DOC_POOL_20260912",
+  "source_journal": "Nature Scientific Data",
+  "issn": "2052-4463",
+  "endpoint": "https://api.crossref.org/journals/2052-4463/works",
+  "query_parameters": {
+    "query": "battery degradation cycling",
+    "filter": "type:journal-article,from-pub-date:2014-01-01,until-pub-date:2026-09-12",
+    "rows": 50,
+    "select": "DOI,title,published-print,published-online,URL"
+  },
+  "deduplication_rule": "Canonical lowercase DOI string",
+  "mandatory_exclusions": [
+    "10.1038/s41597-021-00954-3"
+  ],
+  "selection_algorithm": {
+    "ranking_score": "SHA256('battery-deposit-semantics-s1|confirmatory-positive|' + canonical_doi)",
+    "sorting": "ascending lexicographical",
+    "selection": "first eligible candidate whose abstract confirms commercial lithium-ion cycling data records"
+  },
+  "execution_invariant": "Candidate DOI selected post-freeze; dataset contents, data files, and README assets remain strictly unopened until execution phase."
+}

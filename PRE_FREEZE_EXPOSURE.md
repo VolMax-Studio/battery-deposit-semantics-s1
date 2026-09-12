@@ -35,3 +35,8 @@ This document preregisters all prior exposure, preliminary observations, analyst
 - **Erroneous Citation Emitted by Model:** `10.1016/j.est.2021.102250` attributed to *Journal of Energy Storage* / *dos Reis et al.*.
 - **Factual Correction:** The true publication is *Energy and AI*, Vol. 5, Article 100081 (2021), DOI: `10.1016/j.egyai.2021.100081`.
 - **Epistemic Disposition:** Captured in pre-freeze audit; verified against the publisher record (Elsevier / ScienceDirect) before inclusion in any repository artifact.
+
+### F-PF-02: Secondary Memory Table Materialization Intercepted
+- **Detected By:** Sol (analyst) & Operator.
+- **Defect:** Agent attempted to write `dos_reis_2021_table2.tsv` from unverified secondary memory summaries rather than direct primary PDF extraction.
+- **Epistemic Disposition:** Intercepted and discarded pre-freeze. Primary accepted manuscript PDF verified and pinned under `artifacts/sampling_frame/dos_reis_2021_accepted_manuscript.pdf` (SHA-256 `3c3b55e2...`), and Table 2 transcribed literally from page 12.

@@ -1,0 +1,18 @@
+Location with weblink	Paper Ref	Cell (form size chemistry)	Test variables	Data given	No. of cells
+NASA [53, URL]	[10]	18650 2Ah (?)	Dhrg, T	Q, IR, V, I, T	34
+NASA [53, URL]	[9]	18650 2.2Ah LCO	Chrg, Dhrg, T	Q, IR, V, I, T	28
+CALCE [67, URL]	[68, 70]	prismatic 1.1Ah LCO	Chrg, Dhrg	Q, IR, E, V, I, T	15
+CALCE [67, URL]	[68, 70]	prismatic 1.35Ah LCO	Chrg, Dhrg, T	Q, IR, E, V, I, T	12
+CALCE [67, URL]	[13]	pouch 1.5Ah LCO	Chrg, DOD	Q, V, I	16
+TRI [71, URL]	[6]	18650 1.1Ah LFP/gr	Chrg	Q, IR, V, I, T	124
+TRI [71, URL]	[72]		Chrg	Q, V, I, T	233
+Sandia [74, URL]	[11]	18650 multiple	Dhrg, DOD, T	Q, E, V, I, T	86
+Oxford [75, URL]	[16]	18650 3Ah NCA/gr	Chrg, Cal	Q, E, V, I, T	28
+HNEI [80, URL]	[79]	18650 2.8Ah NMC-LCO/gr	–	Q, E, V, I	15
+EVERLASTING [84, URL] [85, URL]	[83]	18650 3.5Ah NCA/gr	Chrg, Dhrg, T	Q, E, V, I	28
+KIT [86, URL]	[8]	— 40Ah NMC/gr	Chrg, Dhrg	V, I, T	44
+UCL [87, URL]	[88]	18650 3.5Ah NCA/gr	–	Q, V, T	1
+Berkeley [89, URL]	–	18650 2.6Ah LCO/gr	Chrg	Q, V, I, T	1
+Xi’an Jiaotong [92, URL]	[90, 91]	pouch 27Ah NMC/gr	–	Q, E, V, I	2
+Diao et al.[93, URL]	[12]	pouch 3.36Ah LCO/gr	Chrg, Dhrg, T	Q	192
+Poznan [94, URL]	[14]	18650 2.6Ah NMC/carbon	Chrg, Dhrg, DOD, T	Q, I, T	28

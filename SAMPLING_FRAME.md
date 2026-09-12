@@ -4,19 +4,24 @@ This specification establishes the external sampling frame, eligibility criteria
 
 ---
 
-## 1. External Denominator & Canonical Sampling Source
+## 1. External Denominator & Canonical Sampling Source (B-1)
 
-To eliminate selection bias, the sampling frame is drawn strictly from an external, peer-reviewed review published prior to the design of this instrument:
+To eliminate selection bias, the target sampling frame is drawn strictly from an external, peer-reviewed survey published prior to the design of this instrument:
 - **Article:** Gonçalo dos Reis, Calum Strange, Mohit Yadav, Shawn Li, *Lithium-ion battery data and where to find it*, Energy and AI 5 (2021), 100081.
 - **DOI:** `10.1016/j.egyai.2021.100081`
-- **Canonical Object:** Table 2 ("Overview of cycle ageing datasets") in the published Version of Record.
-- **Sampling Unit:** A unique dataset row in Table 2 (not an institution or research group).
+- **Canonical Object:** Table 2 ("Overview of cycle ageing datasets") on page 12 of the published/accepted manuscript.
+- **Pinned Primary Manuscript:** [`artifacts/sampling_frame/dos_reis_2021_accepted_manuscript.pdf`](artifacts/sampling_frame/dos_reis_2021_accepted_manuscript.pdf) (SHA-256: `3c3b55e217fa2925a970c69505acd943ff945b0f4a64dac002a4ec691b5648fb`).
+- **Canonical Table Artifact:** [`artifacts/sampling_frame/dos_reis_2021_table2.tsv`](artifacts/sampling_frame/dos_reis_2021_table2.tsv) (SHA-256: `c81654c225c51d43bc4de3a9d373c0b217c66b2d3752e39de5606e35c7fe7736`).
+- **Transcription Protocol:**
+  - Forward-fill rule: For continuation rows belonging to the same institution header (NASA, CALCE, TRI), `Location with weblink` is forward-filled from the preceding header row.
+  - Cell descriptor rule: Empty cells (e.g., TRI row 2) remain strictly empty strings (`""`) unless the table text explicitly provides a distinct cell descriptor.
+- **Sampling Unit:** A unique dataset row in Table 2 (17 total rows in population; not an institution or research group).
 
 ---
 
 ## 2. Eligibility Criteria & Filtering Rule
 
-A Table 2 row is deemed eligible for inclusion if and only if all of the following conditions are met:
+A Table 2 row is deemed eligible for inclusion in the confirmatory target candidate set if and only if all of the following conditions are met:
 1. **Ageing Classification:** The entry represents commercial cell cycle-ageing data.
 2. **Signal Completeness:** The "Data given" column explicitly includes both voltage ($V$) and current ($I$).
 3. **Public Availability Indicator:** A public dataset URL or institutional location is provided.
@@ -36,8 +41,8 @@ $$\text{canonical\_key} = \text{lower}(\text{strip}(\text{Location})) \,\|\, \te
 $$\text{selection\_score} = \text{SHA256}(\text{"battery-deposit-semantics-s1|10.1016/j.egyai.2021.100081|"} \,\|\, \text{canonical\_key})$$
 
 ### C. Ranking & Selection
-1. All eligible rows are sorted in ascending lexicographical order by `selection_score`.
-2. The first two entries become:
+1. All eligible rows from the canonical population are sorted in ascending lexicographical order by `selection_score`.
+2. The first two eligible entries become:
    - `CONFIRMATORY_TARGET_1`
    - `CONFIRMATORY_TARGET_2`
 
@@ -49,23 +54,34 @@ If a selected repository URL is permanently unreachable at Level-0 verification 
 
 ---
 
-## 4. Positive Control Protocol
+## 4. Control Architecture & Pool Specification (B-2, B-3, B-6)
 
-### A. Calibration Positive (`CALIBRATION_POSITIVE`)
-- **Dataset:** Chung et al., *Scientific Data* 8, 165 (2021), DOI: `10.1038/s41597-021-00954-3`.
-- **Function:** Serves as a known-good reference demonstrating instrument feasibility for explicitly defined export semantics (P1, P3, P5).
+The evaluation set cleanly separates calibration benchmarks from the confirmatory analysis sample:
 
-### B. Confirmatory Positive (`CONFIRMATORY_POSITIVE`)
-- **Pool Definition:** Articles published in *Nature Scientific Data* under battery degradation / cycling subjects that mandate formal Data Descriptors, snapshot prior to freeze.
-- **Strict Exclusion:** Chung (2021) is barred from selection.
-- **Blindness Invariant:** Selection occurs via deterministic hash ranking over published DOIs post-freeze. The data files, READMEs, and technical appendices of the chosen candidate shall remain unopened until the execution phase.
+### A. Calibration Benchmarks (Excluded from Confirmatory Sample Size)
+1. **Sandia Commercial Degradation (`CALIBRATION_CASE`):**
+   - Inductive case study where preliminary boundary questions were formulated.
+2. **Chung et al. (2021) (`CALIBRATION_POSITIVE`):**
+   - *Scientific Data* 8, 165 (2021), DOI: `10.1038/s41597-021-00954-3`.
+   - Used exclusively to verify instrument sensitivity on known-explicit semantics (P1, P3, P5).
+
+### B. Confirmatory High-Documentation Control (`CONFIRMATORY_HIGH_DOC_CONTROL`) (B-2)
+- **Specification:** Pinned by [`artifacts/sampling_frame/scientific_data_pool_spec.json`](artifacts/sampling_frame/scientific_data_pool_spec.json) (SHA-256: `ea4d221889e2b7fff2a2b10ce0c035fe748145a8db43e612564f92a27769d5b3`).
+- **Candidate Pool:** Peer-reviewed Data Descriptors published in *Nature Scientific Data* under battery cycling/degradation subjects prior to 2026-09-12.
+- **Mandatory Exclusion:** Chung et al. (2021) is strictly barred from the candidate pool.
+- **Blindness:** Selection occurs post-freeze via deterministic hash ranking over candidate DOIs. Dataset files remain unopened until execution.
 
 ---
 
-## 5. Sample Size & Scope of Adjudication
-- **Evaluated Set:** Exactly $n = 4$ datasets:
-  1. `CALIBRATION_POSITIVE` ($1$)
-  2. `CONFIRMATORY_POSITIVE` ($1$)
-  3. `CONFIRMATORY_TARGET_1` ($1$)
-  4. `CONFIRMATORY_TARGET_2` ($1$)
-- **Scope Limit:** Findings apply strictly to the evaluated sample under the preregistered frame and search boundaries. This study does not generalize to a global claim regarding all battery data repositories in existence.
+## 5. Sample Size Partition ($n_{\text{confirmatory}} = 3$) (B-6)
+
+To prevent known-good calibration cases from artificially inflating confirmatory documentation rates, sample accounting is strictly partitioned:
+- **Calibration Set ($n = 2$):**
+  - $1 \times \text{CALIBRATION\_CASE}$ (Sandia)
+  - $1 \times \text{CALIBRATION\_POSITIVE}$ (Chung 2021)
+- **Confirmatory Analysis Set ($n_{\text{confirmatory}} = 3$):**
+  - $1 \times \text{CONFIRMATORY\_HIGH\_DOC\_CONTROL}$ (Nature Scientific Data candidate)
+  - $1 \times \text{CONFIRMATORY\_TARGET\_1}$ (dos Reis Table 2 rank 1)
+  - $1 \times \text{CONFIRMATORY\_TARGET\_2}$ (dos Reis Table 2 rank 2)
+
+**Total Evaluated Units:** 5 datasets across both tiers; statistical and synthesis claims are reported strictly over the $n_{\text{confirmatory}} = 3$ set.
