@@ -1,0 +1,39 @@
+{
+  "governing_freeze_commit": "4f168f79cd9ea7ba98f7c1449fd0238e7cfa6126",
+  "l0_timestamp": "2026-09-12T11:30:14+02:00",
+  "accession_timestamp": "2026-09-12T09:32:08Z",
+  "role": "CONFIRMATORY_TARGET_1",
+  "identifier": "TRI [71, URL] / [72]",
+  "description": "Toyota Research Institute: Extreme Fast Charging (Matr.io)",
+  "primary_url": "https://data.matr.io/",
+  "http_status": 200,
+  "final_url": "https://data.matr.io/",
+  "response_bytes_len": 21185,
+  "landing_artifact": "landing_raw.html",
+  "landing_sha256": "03dfea62979b32df6f8e562d7a98ac27c016aa5f7709d04c6c425f248aa06aff",
+  "headers": {
+    "Content-Type": "text/html",
+    "Content-Length": "21185",
+    "Connection": "close",
+    "Date": "Sat, 12 Sep 2026 09:32:07 GMT",
+    "Last-Modified": "Thu, 18 Dec 2025 00:11:41 GMT",
+    "x-amz-version-id": "Ga6TMNKeBRWMqgzuDNj08O7iCsdlz6CH",
+    "ETag": "\"7ec701cc972281cff1068feaf6094f48\"",
+    "Server": "AmazonS3",
+    "X-Cache": "Miss from cloudfront",
+    "Via": "1.1 6fe26da85f49bf5aff6d6b0b178164ae.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Pop": "SOF50-P2",
+    "X-Amz-Cf-Id": "Lkq51DgXUPPx7yRg3jgYlhck7V_uCZKuqvk6iS1n9MCsoNGE4tLhYQ=="
+  },
+  "l0_reachability": "REACHABLE",
+  "error": null,
+  "secondary_fetch": {
+    "url": "https://data.matr.io/1/projects/5d80e633f405260001c0b60a",
+    "http_status": 200,
+    "final_url": "https://data.matr.io/1/#projects/5d80e633f405260001c0b60a",
+    "response_bytes_len": 5095,
+    "artifact": "secondary_landing_raw.html",
+    "sha256": "be3c483ac629c8ca036575188aa3d6083b6a372ffc8c16bf3baab190b61943eb",
+    "error": null
+  }
+}

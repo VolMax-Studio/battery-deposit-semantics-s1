@@ -1,0 +1,33 @@
+{
+  "governing_freeze_commit": "4f168f79cd9ea7ba98f7c1449fd0238e7cfa6126",
+  "l0_timestamp": "2026-09-12T11:30:14+02:00",
+  "accession_timestamp": "2026-09-12T09:32:30Z",
+  "role": "CONFIRMATORY_TARGET_2",
+  "identifier": "KIT [86, URL] / [8]",
+  "description": "KITopen / RADAR4KIT: Frequent Observations from a Battery System with Subunits (DOI: 10.35097/1174)",
+  "primary_url": "https://doi.org/10.5445/IR/1000094469",
+  "http_status": 200,
+  "final_url": "https://publikationen.bibliothek.kit.edu/1000094469",
+  "response_bytes_len": 29198,
+  "landing_artifact": "landing_raw.html",
+  "landing_sha256": "a4ace962b2f3bcffd2c472b3117e30ade96a1db6093901429459e3c84c7c88ca",
+  "headers": {
+    "Date": "Sat, 12 Sep 2026 09:32:09 GMT",
+    "Server": "Apache",
+    "Vary": "Accept-Encoding",
+    "Content-Type": "text/html; charset=UTF-8",
+    "Connection": "close",
+    "Transfer-Encoding": "chunked"
+  },
+  "l0_reachability": "REACHABLE",
+  "error": null,
+  "secondary_fetch": {
+    "url": "https://radar.kit.edu/radar/en/dataset/uabgQSNJZVAhKHgS",
+    "http_status": null,
+    "final_url": "https://radar.kit.edu/radar/en/dataset/uabgQSNJZVAhKHgS",
+    "response_bytes_len": 0,
+    "artifact": "secondary_landing_raw.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+  }
+}
