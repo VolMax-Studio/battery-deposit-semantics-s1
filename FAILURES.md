@@ -67,3 +67,18 @@
      - **P4:** Audited against raw column headers (`Step time (hh:mm:ss)`, `Total time (hh:mm:ss)`).
      - **P5:** Explicit logging interval $\Delta t = 10\text{ s}$ ($t_{\text{rec}} = 10\text{ s}$) verified. Operation coverage evaluated transparently across both conjuncts: Conjunct A (rate rule) is resolved; Conjunct B (complete coverage verification) is physically observable via monotonic sequential index (`Data point`) and timestamp continuity in raw CSV, with explicit notation on absence of a separate text-level packet-loss protocol.
      - **P6:** Documented per authentic 17-digit code convention.
+
+## F-007: Calibration v2 Overclaimed P5 Coverage Resolution, Data-Point Mismatch, and Terminal INSTRUMENT_INVALID
+- **Date:** 2026-09-12
+- **Severity:** Methodological Validity Violation & Gate Disqualification (Terminal S1 Trigger)
+- **Description:**
+  1. **P5 Coverage Resolution Overclaim:** Frozen parameter P5 poses a compound question requiring both the logging rate rule and the verification protocol for complete temporal operation coverage. While logging cadence ($\Delta t = 10\text{ s}$) is explicitly documented in pinned space, the operation-coverage verification protocol is absent from the documentary record. `EVALUATION_v2.md` substituted empirical physical regularity of a single sealed CSV file (continuous `Data point` and timestamp monotonic sequence) for required documentary specification. Under `INSTRUMENT.md`, physical schema is a prerequisite applicability filter, not an evidentiary substitute for explicit documentary resolution.
+  2. **Data-Point Evidentiary Mismatch:** `EVALUATION_v2.md` asserted that `P1_20191021090628_sample.csv` tracks data points "from 1 to 3,100", whereas the authoritative sealed custody manifest (`raw_csv_schema_manifest.json`) records exactly 3,054 lines, and the raw CSV concludes at `Data point` 3,053 (`End status = Time`).
+  3. **P6 Applicability Schema Drift:** `EVALUATION_v2.md` marked P6 as `APPLICABLE` based on 17-digit filenames and cell folder structures, but the frozen instrument applicability gate for P6 specifically requires ambiguous repeated cycle indices across separated summary and time-series exports.
+  4. **Calibration Gate Failure & Instrument Disqualification:** The frozen preregistration mandated that `CALIBRATION_POSITIVE` (Chung 2021) achieve `RESOLVED_IN_PINNED_SPACE` across all three pre-asserted parameters (P1, P3, P5). With P5 unresolved on its coverage verification conjunct, Chung achieved only 2/3 resolved parameters. Under `INSTRUMENT.md` §5.A, this triggers `INSTRUMENT_INVALID`.
+- **Resolution:**
+  1. S1 confirmatory execution is permanently terminated. No confirmatory dossiers (`CONFIRMATORY_HIGH_DOC_CONTROL`, `CONFIRMATORY_TARGET_1`, `CONFIRMATORY_TARGET_2`) shall be opened or semantically evaluated.
+  2. S1 repository status is sealed in terminal state: `INSTRUMENT_INVALID`.
+  3. All historical commits (`c2d7ecf`, `34d4afa`) and artifacts are preserved append-only.
+  4. Non-verdict-bearing exploratory observation registered: pinned public documentation in Nature Scientific Data resolved cadence but lacked an explicit operation-coverage verification protocol.
+  5. Chung (2021) is formally logged as a fully consumed/exposed case, barred from prospective calibration in any successor instance.
