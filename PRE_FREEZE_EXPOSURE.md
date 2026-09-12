@@ -40,3 +40,8 @@ This document preregisters all prior exposure, preliminary observations, analyst
 - **Detected By:** Sol (analyst) & Operator.
 - **Defect:** Agent attempted to write `dos_reis_2021_table2.tsv` from unverified secondary memory summaries rather than direct primary PDF extraction.
 - **Epistemic Disposition:** Intercepted and discarded pre-freeze. Primary accepted manuscript PDF verified and pinned under `artifacts/sampling_frame/dos_reis_2021_accepted_manuscript.pdf` (SHA-256 `3c3b55e2...`), and Table 2 transcribed literally from page 12.
+
+### F-PF-03: Candidate Pool Exposure & Non-Blind High-Doc Eligibility Adjudication
+- **Detected By:** External Gate (G-4) & Reviewers.
+- **Prior Exposure:** The initial 36-item Crossref candidate pool was inspected, revealing non-lithium entries (zinc-oxygen, zinc-air) and string collision on `recycling`, with Dongmo et al. at Rank 1.
+- **Epistemic Invariant:** High-doc control selection is **prospective with respect to deposit repository contents**, but **not blind with respect to candidate-pool composition**. The revised eligibility adjudication (`scientific_data_eligibility.tsv`) was designed after pool exposure to explicitly restrict candidate selection to empirical rechargeable lithium-ion datasets.

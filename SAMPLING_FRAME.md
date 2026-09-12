@@ -63,14 +63,16 @@ The evaluation set cleanly separates calibration benchmarks from the confirmator
    - *Scientific Data* 8, 165 (2021), DOI: `10.1038/s41597-021-00954-3`.
    - Used exclusively to verify instrument consistency on known-explicit semantics (P1, P3, P5).
 
-### B. Confirmatory High-Documentation Control (`CONFIRMATORY_HIGH_DOC_CONTROL`) (G-2)
+### B. Confirmatory High-Documentation Control (`CONFIRMATORY_HIGH_DOC_CONTROL`) (G-2, G-4)
 - **Specification:** Pinned by [`artifacts/sampling_frame/scientific_data_pool_spec.json`](artifacts/sampling_frame/scientific_data_pool_spec.json).
-- **Frozen Crossref Response:** [`artifacts/sampling_frame/scientific_data_crossref_raw.json`](artifacts/sampling_frame/scientific_data_crossref_raw.json) (SHA-256: `854f7da7770d68a564b31a2b242d22d103b31b205c928bb13c84225c3ee8c83f`).
-- **Frozen Candidates TSV:** [`artifacts/sampling_frame/scientific_data_candidates.tsv`](artifacts/sampling_frame/scientific_data_candidates.tsv) (SHA-256: `6002ee04b5c984a8700e09546c9e5fcdc4d9c87076a5baf00a8c0029fc44f5db`).
-- **Candidate Pool:** 8 eligible peer-reviewed Data Descriptors published in *Nature Scientific Data* (ISSN `2052-4463`) filtered mechanically by title keywords (`battery` and `cycling`/`degradation`).
+- **Frozen Crossref Response:** [`artifacts/sampling_frame/scientific_data_crossref_raw.json`](artifacts/sampling_frame/scientific_data_crossref_raw.json) (36 total items).
+- **Frozen Eligibility Adjudication:** [`artifacts/sampling_frame/scientific_data_eligibility.tsv`](artifacts/sampling_frame/scientific_data_eligibility.tsv) (all 36 items explicitly classified; exactly 7 items verified `IN_SCOPE` for rechargeable lithium-ion cycling).
+- **Frozen Candidates TSV:** [`artifacts/sampling_frame/scientific_data_candidates.tsv`](artifacts/sampling_frame/scientific_data_candidates.tsv) (7 in-scope items ranked deterministically by selection score).
+- **Comprehensive Artifact Checksums:** Verified against [`artifacts/sampling_frame/SHA256SUMS`](artifacts/sampling_frame/SHA256SUMS).
+- **Candidate Pool:** 7 verified peer-reviewed Data Descriptors published in *Nature Scientific Data* (ISSN `2052-4463`) under rechargeable lithium-ion battery cycling/aging.
 - **Mandatory Exclusion:** Chung et al. (2021) is strictly barred from the candidate pool.
-- **Deterministic Selection:** The top-ranked entry by `selection_score` in `scientific_data_candidates.tsv` becomes `CONFIRMATORY_HIGH_DOC_CONTROL` upon freeze ratification.
-- **Blindness Invariant:** Target repository contents and data files remain strictly unopened prior to execution.
+- **Deterministic Selection:** The top-ranked in-scope entry in `scientific_data_candidates.tsv` (`10.1038/s41597-025-05725-y`) becomes `CONFIRMATORY_HIGH_DOC_CONTROL` upon freeze ratification.
+- **Blindness Invariant:** Target repository contents, time-series data files, and README assets of the selected candidate remain strictly unopened prior to execution.
 
 ---
 

@@ -11,22 +11,24 @@
   },
   "raw_response_artifact": "artifacts/sampling_frame/scientific_data_crossref_raw.json",
   "raw_response_sha256": "854f7da7770d68a564b31a2b242d22d103b31b205c928bb13c84225c3ee8c83f",
+  "eligibility_tsv_artifact": "artifacts/sampling_frame/scientific_data_eligibility.tsv",
+  "eligibility_tsv_sha256": "c2d9daf3cb12a140b5ca159566708326a5434eb79802da055aff9796971f867f",
   "candidates_tsv_artifact": "artifacts/sampling_frame/scientific_data_candidates.tsv",
-  "candidates_tsv_sha256": "6002ee04b5c984a8700e09546c9e5fcdc4d9c87076a5baf00a8c0029fc44f5db",
+  "candidates_tsv_sha256": "e75fed70f0c88e37525c90d1be03c899a6e7da58be3e42d0ebb11e2e1d44bd32",
   "total_items_retrieved": 36,
-  "eligible_candidates_count": 8,
+  "eligible_in_scope_count": 7,
   "mandatory_exclusions": [
     "10.1038/s41597-021-00954-3"
   ],
-  "mechanical_filter_rule": {
-    "title_includes_battery": true,
-    "title_includes_cycling_or_degradation": true,
-    "title_excludes_bike_or_ecosystem": true
+  "eligibility_protocol": {
+    "rule": "Every single item of the 36 retrieved Crossref records is classified into IN_SCOPE, OUT_OF_SCOPE, or INSUFFICIENT_METADATA_TO_CLASSIFY based on verified title and domain",
+    "in_scope_criterion": "Empirical cycling/aging/degradation dataset of rechargeable lithium-ion cells or packs",
+    "out_of_scope_criterion": "Non-lithium chemistry, non-cycling datasets (LCA, recycling, surveys, computation), or non-battery domains"
   },
   "deterministic_selection_algorithm": {
     "score_formula": "SHA256('battery-deposit-semantics-s1|confirmatory-control|' + lower(strip(DOI)))",
-    "ranking": "ascending lexicographical by selection_score",
-    "selection": "Top-ranked eligible entry in candidates TSV becomes CONFIRMATORY_HIGH_DOC_CONTROL upon freeze execution"
+    "ranking": "ascending lexicographical by selection_score over IN_SCOPE entries",
+    "selection": "Top-ranked entry in candidates TSV (10.1038/s41597-025-05725-y) becomes CONFIRMATORY_HIGH_DOC_CONTROL upon freeze ratification"
   },
-  "blindness_invariant": "Dataset repositories, data files, and README assets of candidate DOIs remain strictly unopened prior to execution."
+  "blindness_invariant": "Dataset repository contents, time-series data files, and README assets of the selected DOI remain strictly unopened prior to execution."
 }
