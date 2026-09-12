@@ -55,3 +55,13 @@ This document preregisters all prior exposure, preliminary observations, analyst
   - Total `IN_SCOPE` candidates: 4.
   - Deterministic hash selection over the sealed in-scope population selected `10.1038/s41597-024-03831-x` as `CONFIRMATORY_HIGH_DOC_CONTROL`.
 
+### F-PF-05: Target Ranking Exposure & Scope Realignment (Outcome-Aware Disclosure)
+- **Detected By:** Independent Reviewers (Claude & External Gate).
+- **Prior Exposure:**
+  1. Full Table-2 hash-ranking was evaluated across all 13 eligible rows, revealing that Rank 1 (`15730654...` -> `TRI [71, URL]` / `[72]`) and Rank 2 (`1a549944...` -> `TRI [71, URL]` / `[6]`) point to the identical deposit location (`TRI [71, URL]`), with `KIT [86, URL]` at Rank 3 (`29614ddf...`).
+  2. High-Doc candidate pool review revealed that `10.1038/s41597-022-01217-5` (Rank 4) was a cathode-material cycling dataset rather than a full rechargeable cell or pack dataset.
+- **Epistemic Disposition & Non-Discretionary Resolution:**
+  1. Formalized the observation unit as the unique canonical deposit location (`lower(strip(Location with weblink))`) and instituted sampling without replacement at the observation-unit level: candidate rows mapping to an already-selected deposit location are logged as `SAME_DEPOSIT_LOCATION_DUPLICATE` and skipped. This deterministically assigns `TRI [71, URL]` / `[72]` to `CONFIRMATORY_TARGET_1` and `KIT [86, URL]` / `[8]` to `CONFIRMATORY_TARGET_2`.
+  2. Aligned the High-Doc scope criterion to strictly require cycling/aging/degradation of rechargeable lithium-ion cells or packs, reclassifying `10.1038/s41597-022-01217-5` to `OUT_OF_SCOPE` (leaving 3 `IN_SCOPE` candidates). The top-ranked candidate remains invariant (`10.1038/s41597-024-03831-x`).
+  3. Pre-freeze blindness invariant remains strictly maintained: zero repository URLs, data files, or deposit documents for TRI, KIT, or the High-Doc candidate have been accessed or inspected (`target_deposit_inspections_pre_freeze: 0`).
+

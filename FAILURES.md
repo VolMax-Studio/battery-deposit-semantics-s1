@@ -19,3 +19,14 @@
   1. A naive keyword filter (`battery` and `cycling`/`degradation`) allowed non-lithium chemistry (zinc-oxygen, zinc-air) and non-cycling papers (battery recycling due to `recycling ⊃ cycling`) into the High-Doc candidate pool, placing Dongmo et al. (zinc-oxygen) at Rank 1.
   2. The SHA-256 checksum for `scientific_data_pool_spec.json` declared in `CANDIDATE.md` was stale.
 - **Resolution:** Intercepted by Gate review. Rather than replacing with another fragile regex, the entire 36-item Crossref population was explicitly adjudicated item-by-item in `artifacts/sampling_frame/scientific_data_eligibility.tsv` against a strict lithium-ion cycling domain criterion, isolating exactly 7 `IN_SCOPE` datasets. The candidate pool was re-ranked deterministically over in-scope items, placing lithium-ion characterization dataset `10.1038/s41597-025-05725-y` at Rank 1. All checksums were recomputed and unified in `artifacts/sampling_frame/SHA256SUMS`.
+
+## F-004: Target Duplicate Observation Unit & High-Doc Cell/Pack Scope Misalignment (Intercepted Pre-Freeze)
+- **Date:** 2026-09-12
+- **Severity:** Sampling Design & Observation-Unit Defect (Intercepted Pre-Freeze)
+- **Description:**
+  1. **Target Observation-Unit Collapse (N-1):** Deterministic ranking of dos Reis Table 2 eligible rows placed TRI row 2 (Ref [72]) at Rank 1 and TRI row 1 (Ref [6]) at Rank 2. Both point to the exact same canonical repository location (`TRI [71, URL]`), collapsing confirmatory observation units to $n=1$.
+  2. **High-Doc Domain Scope Dropping Cells/Packs (N-2):** Title-evidentiary filter permitted materials/component cycling studies without requiring full cells or packs, admitting `10.1038/s41597-022-01217-5` (Al2O3-coated cathode material cycling).
+- **Resolution:**
+  1. Formalized observation unit as unique canonical deposit location (`lower(strip(Location with weblink))`). Instituted sampling without replacement at observation-unit level: Rank 1 selected (`TRI [71, URL]` / `[72]`), Rank 2 skipped as `SAME_DEPOSIT_LOCATION_DUPLICATE`, and next eligible entry with distinct observation unit (`KIT [86, URL]` / `[8]`) selected as `CONFIRMATORY_TARGET_2`.
+  2. Aligned High-Doc scope criterion to strictly require empirical cycling/aging/degradation of rechargeable lithium-ion cells or packs, reclassifying `10.1038/s41597-022-01217-5` to `OUT_OF_SCOPE` (in-scope count updated from 4 to 3; Rank 1 invariant: `10.1038/s41597-024-03831-x`).
+  3. Recomputed and synchronized all affected artifacts and authoritative checksums.

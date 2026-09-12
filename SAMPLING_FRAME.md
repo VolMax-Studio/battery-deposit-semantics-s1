@@ -14,6 +14,7 @@ To eliminate selection bias, the target sampling frame is drawn strictly from an
   - **Forward-fill rule:** For continuation rows belonging to the same institution header (NASA, CALCE, TRI), `Location with weblink` is forward-filled from the preceding header row.
   - **Cell descriptor rule:** Empty cells (e.g., TRI row 2) remain strictly empty strings (`""`) unless the table text explicitly provides a distinct cell descriptor.
 - **Sampling Unit:** A unique dataset row in Table 2 (17 total rows in population; not an institution or research group).
+- **Observation Unit:** A unique canonical deposit repository location (`lower(strip(Location with weblink))`).
 
 ---
 
@@ -40,14 +41,19 @@ $$\text{selection\_score} = \text{SHA256}(\text{"battery-deposit-semantics-s1|10
 
 ### C. Ranking & Selection
 1. All eligible rows from the canonical population are sorted in ascending lexicographical order by `selection_score`.
-2. The first two eligible entries become:
-   - `CONFIRMATORY_TARGET_1`
-   - `CONFIRMATORY_TARGET_2`
+2. **Observation-Unit Non-Duplication Rule (N-1):** Selection proceeds without replacement at the observation-unit level:
+   - The top-ranked eligible row is selected as `CONFIRMATORY_TARGET_1`.
+   - Candidate rows are then evaluated in ascending order of `selection_score`: any candidate row whose canonical deposit location (`lower(strip(Location with weblink))`) matches that of an already-selected target is excluded and logged as `SAME_DEPOSIT_LOCATION_DUPLICATE` (this is an observation-unit deduplication, distinct from `FRAME_ATTRITION`).
+   - The first eligible candidate row with a distinct canonical deposit location is selected as `CONFIRMATORY_TARGET_2`.
+3. **Deterministic Target Assignments:**
+   - **Rank 1:** Score starts with `15730654...` -> `TRI [71, URL]` (Paper Ref `[72]`) -> `CONFIRMATORY_TARGET_1`.
+   - **Rank 2:** Score starts with `1a549944...` -> `TRI [71, URL]` (Paper Ref `[6]`) -> Skipped under non-duplication rule (`SAME_DEPOSIT_LOCATION_DUPLICATE`).
+   - **Rank 3:** Score starts with `29614ddf...` -> `KIT [86, URL]` (Paper Ref `[8]`) -> `CONFIRMATORY_TARGET_2`.
 
 ### D. Attrition Handling (`FRAME_ATTRITION`)
 If a selected repository URL is permanently unreachable at Level-0 verification (404, repository retired, domain defunct):
 - It is formally logged as `FRAME_ATTRITION` in `FAILURES.md`.
-- The next eligible row in ascending `selection_score` order is selected as the replacement.
+- The next eligible row with a distinct observation-unit location in ascending `selection_score` order is selected as the replacement.
 - Documentation quality, format complexity, or perceived difficulty of adjudication shall never serve as grounds for dataset replacement.
 
 ---
@@ -66,10 +72,11 @@ The evaluation set cleanly separates calibration benchmarks from the confirmator
 ### B. Confirmatory High-Documentation Control (`CONFIRMATORY_HIGH_DOC_CONTROL`) (G-2, G-4)
 - **Specification:** Pinned by [`artifacts/sampling_frame/scientific_data_pool_spec.json`](artifacts/sampling_frame/scientific_data_pool_spec.json).
 - **Frozen Crossref Response:** [`artifacts/sampling_frame/scientific_data_crossref_raw.json`](artifacts/sampling_frame/scientific_data_crossref_raw.json) (36 total items).
-- **Frozen Eligibility Adjudication:** [`artifacts/sampling_frame/scientific_data_eligibility.tsv`](artifacts/sampling_frame/scientific_data_eligibility.tsv) (SHA-256: `0f0bbbbff910fbcb22d19f691751861ad3b282eed1c77193a6e440389618bd59`).
-  - All 36 items explicitly classified: **4 `IN_SCOPE`**, **3 `INSUFFICIENT_METADATA_TO_CLASSIFY`**, **29 `OUT_OF_SCOPE`**.
+- **Frozen Eligibility Adjudication:** [`artifacts/sampling_frame/scientific_data_eligibility.tsv`](artifacts/sampling_frame/scientific_data_eligibility.tsv).
+  - All 36 items explicitly classified: **3 `IN_SCOPE`**, **3 `INSUFFICIENT_METADATA_TO_CLASSIFY`**, **30 `OUT_OF_SCOPE`**.
+  - **Cell/Pack Scope Alignment (N-2):** Criterion requires cycling/aging/degradation datasets of rechargeable lithium-ion cells or packs. Materials-only and single-component studies (e.g., Al2O3 coated LiNi0.70Co0.15Mn0.15O2 cathodes) are classified as `OUT_OF_SCOPE`.
   - **Index-Layer Finding:** 3 of 36 records (8.3%) omit critical domain signals (chemistry or test regime) from title metadata, requiring abstain disposition under strict pre-freeze rules.
-- **Frozen Candidates TSV:** [`artifacts/sampling_frame/scientific_data_candidates.tsv`](artifacts/sampling_frame/scientific_data_candidates.tsv) (SHA-256: `f4299bfed812cd55446fe182b6d233b4a89a21fa9a23a465a2a29b56032bb89f`) (4 in-scope items ranked deterministically by selection score).
+- **Frozen Candidates TSV:** [`artifacts/sampling_frame/scientific_data_candidates.tsv`](artifacts/sampling_frame/scientific_data_candidates.tsv) (3 in-scope items ranked deterministically by selection score).
 - **Comprehensive Artifact Checksums:** Verified against [`artifacts/sampling_frame/SHA256SUMS`](artifacts/sampling_frame/SHA256SUMS).
 - **Mandatory Exclusion:** Chung et al. (2021) is strictly barred from the candidate pool.
 - **Deterministic Selection:** The top-ranked in-scope entry in `scientific_data_candidates.tsv` (`10.1038/s41597-024-03831-x` — *Comprehensive battery aging dataset: capacity and impedance fade measurements of a lithium-ion NMC/C-SiO cell*) becomes `CONFIRMATORY_HIGH_DOC_CONTROL` upon freeze ratification.
@@ -85,8 +92,9 @@ To prevent known-good calibration cases from artificially inflating confirmatory
   - $1 \times \text{CALIBRATION\_CASE}$ (Sandia)
   - $1 \times \text{CALIBRATION\_POSITIVE}$ (Chung 2021)
 - **Confirmatory Analysis Set ($n_{\text{confirmatory}} = 3$):**
-  - $1 \times \text{CONFIRMATORY\_HIGH\_DOC\_CONTROL}$ (Nature Scientific Data candidate rank 1)
-  - $1 \times \text{CONFIRMATORY\_TARGET\_1}$ (dos Reis Table 2 rank 1)
-  - $1 \times \text{CONFIRMATORY\_TARGET\_2}$ (dos Reis Table 2 rank 2)
+  - $1 \times \text{CONFIRMATORY\_HIGH\_DOC\_CONTROL}$ (Nature Scientific Data candidate rank 1: `10.1038/s41597-024-03831-x`)
+  - $1 \times \text{CONFIRMATORY\_TARGET\_1}$ (dos Reis Table 2 rank 1: `TRI [71, URL]` / `[72]`)
+  - $1 \times \text{CONFIRMATORY\_TARGET\_2}$ (dos Reis Table 2 observation unit rank 2: `KIT [86, URL]` / `[8]`)
 
 **Total Evaluated Units:** 5 datasets across both tiers; statistical and synthesis claims are reported strictly over the $n_{\text{confirmatory}} = 3$ set.
+
