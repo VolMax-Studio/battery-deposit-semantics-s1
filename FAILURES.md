@@ -47,3 +47,23 @@
   3. Pinned acquisition for TRI is formally governed: client-side rendering of the exact pinned Tier-1 URL is permitted to inspect text, but failures of unrendered text cannot be scored as `NOT_FOUND_IN_PINNED_SPACE` without logging an acquisition failure.
   4. Platform co-dependence between High-Doc and KIT is registered as an explicit cross-case analysis limitation.
 
+## F-006: Calibration Dossier Transcription Errors & Custody Defect (Intercepted Post-Freeze)
+- **Date:** 2026-09-12
+- **Severity:** Calibration Feasibility & Evidentiary Integrity Defect (Intercepted Post-Freeze)
+- **Description:**
+  1. **Evidentiary Transcription Errors in `EVALUATION.md` (v1, commit `c2d7ecf`):**
+     - **P1 (Current Polarity):** Dossier inverted the sign convention, asserting positive = charge and negative = discharge. The authentic pinned article explicitly defines: *"and $I(\tau)$ is the current with positive (negative) value for discharge (charge)"* (Section *Methods - UL 1974*, line 1076), corroborated by underlying test steps where discharge current is positive ($+7.493\text{ A}$) and cell voltage drops.
+     - **P2 (Hardware Equipment):** Dossier asserted Chroma 17011 cycler specifications. The authentic pinned manuscript explicitly specifies Chen Tech Electric `CTE-MCP-5082020A` and `CTE-Will 1.13tc` software.
+     - **P6 (File Naming Schema):** Dossier asserted `Cell_ID_Phase_Cycle.csv`. The authentic pinned manuscript explicitly specifies a 17-digit code (`procedure code + start date/time code`, e.g., `P1_20191021090628.csv`).
+     - **P5 (Threshold Logging Trigger):** Dossier asserted undocumented event-driven threshold captures. The authentic text specifies fixed interval logging ($\Delta t = 10\text{ s}$ / $t_{\text{rec}} = 10\text{ s}$).
+  2. **Custody Defect:** Pinned Figshare DOI `10.6084/m9.figshare.14495604` functions as a metadata record pointing to the true underlying repository hosted at Open Science Framework (OSF, `https://doi.org/10.17605/OSF.IO/PFH3G`, node `pfh3g`). The evaluation in `c2d7ecf` was conducted without sealing authentic raw CSV schema custody in `evidence/calibration/chung_2021/`.
+- **Resolution:**
+  1. Historical commit `c2d7ecf` is preserved append-only; `EVALUATION.md` (v1) is superseded by `EVALUATION_v2.md`.
+  2. Authentic repository hierarchy sealed in custody: Figshare API JSON, OSF root files manifest JSON, and a representative authentic raw CSV file (`P1_20191021090628.csv` from node `pfh3g`, 186,520 bytes, 3,101 rows) deposited in `evidence/calibration/chung_2021/raw_schema/` with SHA-256 hashes bound to governing freeze `4f168f7`.
+  3. `EVALUATION_v2.md` authored with verbatim textual citations and audited against raw CSV column headers:
+     - **P1:** `RESOLVED_IN_PINNED_SPACE` (positive = discharge, negative = charge).
+     - **P2:** Withdrawn as unasserted / `NOT_FOUND_IN_PINNED_SPACE` for Chroma 17011 (true hardware CTE-MCP-5082020A documented).
+     - **P3:** `RESOLVED_IN_PINNED_SPACE` (explicit text confirms capacity and energy return to zero at step onset).
+     - **P4:** Audited against raw column headers (`Step time (hh:mm:ss)`, `Total time (hh:mm:ss)`).
+     - **P5:** Explicit logging interval $\Delta t = 10\text{ s}$ ($t_{\text{rec}} = 10\text{ s}$) verified. Operation coverage evaluated transparently across both conjuncts: Conjunct A (rate rule) is resolved; Conjunct B (complete coverage verification) is physically observable via monotonic sequential index (`Data point`) and timestamp continuity in raw CSV, with explicit notation on absence of a separate text-level packet-loss protocol.
+     - **P6:** Documented per authentic 17-digit code convention.
