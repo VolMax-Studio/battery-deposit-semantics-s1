@@ -4,19 +4,29 @@
   "issn": "2052-4463",
   "endpoint": "https://api.crossref.org/journals/2052-4463/works",
   "query_parameters": {
-    "query": "battery degradation cycling",
+    "query.title": "battery cycling degradation",
     "filter": "type:journal-article,from-pub-date:2014-01-01,until-pub-date:2026-09-12",
     "rows": 50,
-    "select": "DOI,title,published-print,published-online,URL"
+    "select": "DOI,title,published,URL"
   },
-  "deduplication_rule": "Canonical lowercase DOI string",
+  "raw_response_artifact": "artifacts/sampling_frame/scientific_data_crossref_raw.json",
+  "raw_response_sha256": "854f7da7770d68a564b31a2b242d22d103b31b205c928bb13c84225c3ee8c83f",
+  "candidates_tsv_artifact": "artifacts/sampling_frame/scientific_data_candidates.tsv",
+  "candidates_tsv_sha256": "6002ee04b5c984a8700e09546c9e5fcdc4d9c87076a5baf00a8c0029fc44f5db",
+  "total_items_retrieved": 36,
+  "eligible_candidates_count": 8,
   "mandatory_exclusions": [
     "10.1038/s41597-021-00954-3"
   ],
-  "selection_algorithm": {
-    "ranking_score": "SHA256('battery-deposit-semantics-s1|confirmatory-positive|' + canonical_doi)",
-    "sorting": "ascending lexicographical",
-    "selection": "first eligible candidate whose abstract confirms commercial lithium-ion cycling data records"
+  "mechanical_filter_rule": {
+    "title_includes_battery": true,
+    "title_includes_cycling_or_degradation": true,
+    "title_excludes_bike_or_ecosystem": true
   },
-  "execution_invariant": "Candidate DOI selected post-freeze; dataset contents, data files, and README assets remain strictly unopened until execution phase."
+  "deterministic_selection_algorithm": {
+    "score_formula": "SHA256('battery-deposit-semantics-s1|confirmatory-control|' + lower(strip(DOI)))",
+    "ranking": "ascending lexicographical by selection_score",
+    "selection": "Top-ranked eligible entry in candidates TSV becomes CONFIRMATORY_HIGH_DOC_CONTROL upon freeze execution"
+  },
+  "blindness_invariant": "Dataset repositories, data files, and README assets of candidate DOIs remain strictly unopened prior to execution."
 }

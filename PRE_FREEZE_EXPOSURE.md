@@ -19,7 +19,7 @@ This document preregisters all prior exposure, preliminary observations, analyst
   - **P1 (Current Polarity):** Pre-asserted by analyst (Sol) as explicitly defined in article text.
   - **P3 (Capacity & Reset):** Pre-asserted by analyst (Sol) as explicitly defined (distinguishing instantaneous from accumulated quantities, capacity/energy reset to zero at step onset).
   - **P5 (Sampling Cadence):** Pre-asserted by analyst (Sol) as explicitly defined (10-second sampling cadence in CSV columns).
-- **Mandatory Exclusion:** Chung (2021) is **strictly barred** from inclusion in the candidate pool for `CONFIRMATORY_POSITIVE`.
+- **Mandatory Exclusion:** Chung (2021) is **strictly barred** from inclusion in the candidate pool for `CONFIRMATORY_HIGH_DOC_CONTROL`.
 
 ### C. dos Reis et al. (2021) (`SAMPLING_FRAME_ARTICLE`)
 - **Citation:** Gonçalo dos Reis, Calum Strange, Mohit Yadav, Shawn Li, *Lithium-ion battery data and where to find it*, Energy and AI 5 (2021), 100081, DOI: `10.1016/j.egyai.2021.100081`.

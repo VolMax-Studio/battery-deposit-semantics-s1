@@ -1,20 +1,18 @@
 # Sampling Frame & Dataset Selection Protocol (S1)
 
-This specification establishes the external sampling frame, eligibility criteria, deterministic hash-ranking algorithm, and positive control pool for instance `battery-deposit-semantics-s1`.
+This specification establishes the external sampling frame, eligibility criteria, deterministic hash-ranking algorithm, and control pool for instance `battery-deposit-semantics-s1`.
 
 ---
 
-## 1. External Denominator & Canonical Sampling Source (B-1)
+## 1. External Denominator & Canonical Sampling Source (B-1, G-3)
 
 To eliminate selection bias, the target sampling frame is drawn strictly from an external, peer-reviewed survey published prior to the design of this instrument:
-- **Article:** Gonçalo dos Reis, Calum Strange, Mohit Yadav, Shawn Li, *Lithium-ion battery data and where to find it*, Energy and AI 5 (2021), 100081.
-- **DOI:** `10.1016/j.egyai.2021.100081`
-- **Canonical Object:** Table 2 ("Overview of cycle ageing datasets") on page 12 of the published/accepted manuscript.
-- **Pinned Primary Manuscript:** [`artifacts/sampling_frame/dos_reis_2021_accepted_manuscript.pdf`](artifacts/sampling_frame/dos_reis_2021_accepted_manuscript.pdf) (SHA-256: `3c3b55e217fa2925a970c69505acd943ff945b0f4a64dac002a4ec691b5648fb`).
+- **Bibliographic Work:** Gonçalo dos Reis, Calum Strange, Mohit Yadav, Shawn Li, *Lithium-ion battery data and where to find it*, Energy and AI 5 (2021), 100081, DOI: `10.1016/j.egyai.2021.100081`.
+- **Canonical S1 Sampling Artifact (G-3):** The pinned accepted-manuscript PDF, [`artifacts/sampling_frame/dos_reis_2021_accepted_manuscript.pdf`](artifacts/sampling_frame/dos_reis_2021_accepted_manuscript.pdf) (SHA-256: `3c3b55e217fa2925a970c69505acd943ff945b0f4a64dac002a4ec691b5648fb`), Table 2 ("Overview of cycle ageing datasets"), page 12.
 - **Canonical Table Artifact:** [`artifacts/sampling_frame/dos_reis_2021_table2.tsv`](artifacts/sampling_frame/dos_reis_2021_table2.tsv) (SHA-256: `c81654c225c51d43bc4de3a9d373c0b217c66b2d3752e39de5606e35c7fe7736`).
 - **Transcription Protocol:**
-  - Forward-fill rule: For continuation rows belonging to the same institution header (NASA, CALCE, TRI), `Location with weblink` is forward-filled from the preceding header row.
-  - Cell descriptor rule: Empty cells (e.g., TRI row 2) remain strictly empty strings (`""`) unless the table text explicitly provides a distinct cell descriptor.
+  - **Forward-fill rule:** For continuation rows belonging to the same institution header (NASA, CALCE, TRI), `Location with weblink` is forward-filled from the preceding header row.
+  - **Cell descriptor rule:** Empty cells (e.g., TRI row 2) remain strictly empty strings (`""`) unless the table text explicitly provides a distinct cell descriptor.
 - **Sampling Unit:** A unique dataset row in Table 2 (17 total rows in population; not an institution or research group).
 
 ---
@@ -54,7 +52,7 @@ If a selected repository URL is permanently unreachable at Level-0 verification 
 
 ---
 
-## 4. Control Architecture & Pool Specification (B-2, B-3, B-6)
+## 4. Control Architecture & Pool Specification (G-2)
 
 The evaluation set cleanly separates calibration benchmarks from the confirmatory analysis sample:
 
@@ -63,13 +61,16 @@ The evaluation set cleanly separates calibration benchmarks from the confirmator
    - Inductive case study where preliminary boundary questions were formulated.
 2. **Chung et al. (2021) (`CALIBRATION_POSITIVE`):**
    - *Scientific Data* 8, 165 (2021), DOI: `10.1038/s41597-021-00954-3`.
-   - Used exclusively to verify instrument sensitivity on known-explicit semantics (P1, P3, P5).
+   - Used exclusively to verify instrument consistency on known-explicit semantics (P1, P3, P5).
 
-### B. Confirmatory High-Documentation Control (`CONFIRMATORY_HIGH_DOC_CONTROL`) (B-2)
-- **Specification:** Pinned by [`artifacts/sampling_frame/scientific_data_pool_spec.json`](artifacts/sampling_frame/scientific_data_pool_spec.json) (SHA-256: `ea4d221889e2b7fff2a2b10ce0c035fe748145a8db43e612564f92a27769d5b3`).
-- **Candidate Pool:** Peer-reviewed Data Descriptors published in *Nature Scientific Data* under battery cycling/degradation subjects prior to 2026-09-12.
+### B. Confirmatory High-Documentation Control (`CONFIRMATORY_HIGH_DOC_CONTROL`) (G-2)
+- **Specification:** Pinned by [`artifacts/sampling_frame/scientific_data_pool_spec.json`](artifacts/sampling_frame/scientific_data_pool_spec.json).
+- **Frozen Crossref Response:** [`artifacts/sampling_frame/scientific_data_crossref_raw.json`](artifacts/sampling_frame/scientific_data_crossref_raw.json) (SHA-256: `854f7da7770d68a564b31a2b242d22d103b31b205c928bb13c84225c3ee8c83f`).
+- **Frozen Candidates TSV:** [`artifacts/sampling_frame/scientific_data_candidates.tsv`](artifacts/sampling_frame/scientific_data_candidates.tsv) (SHA-256: `6002ee04b5c984a8700e09546c9e5fcdc4d9c87076a5baf00a8c0029fc44f5db`).
+- **Candidate Pool:** 8 eligible peer-reviewed Data Descriptors published in *Nature Scientific Data* (ISSN `2052-4463`) filtered mechanically by title keywords (`battery` and `cycling`/`degradation`).
 - **Mandatory Exclusion:** Chung et al. (2021) is strictly barred from the candidate pool.
-- **Blindness:** Selection occurs post-freeze via deterministic hash ranking over candidate DOIs. Dataset files remain unopened until execution.
+- **Deterministic Selection:** The top-ranked entry by `selection_score` in `scientific_data_candidates.tsv` becomes `CONFIRMATORY_HIGH_DOC_CONTROL` upon freeze ratification.
+- **Blindness Invariant:** Target repository contents and data files remain strictly unopened prior to execution.
 
 ---
 
@@ -80,7 +81,7 @@ To prevent known-good calibration cases from artificially inflating confirmatory
   - $1 \times \text{CALIBRATION\_CASE}$ (Sandia)
   - $1 \times \text{CALIBRATION\_POSITIVE}$ (Chung 2021)
 - **Confirmatory Analysis Set ($n_{\text{confirmatory}} = 3$):**
-  - $1 \times \text{CONFIRMATORY\_HIGH\_DOC\_CONTROL}$ (Nature Scientific Data candidate)
+  - $1 \times \text{CONFIRMATORY\_HIGH\_DOC\_CONTROL}$ (Nature Scientific Data candidate rank 1)
   - $1 \times \text{CONFIRMATORY\_TARGET\_1}$ (dos Reis Table 2 rank 1)
   - $1 \times \text{CONFIRMATORY\_TARGET\_2}$ (dos Reis Table 2 rank 2)
 
