@@ -1,0 +1,25 @@
+{
+  "baseline_commit": "d5d951bf9ffde2cf61859c99b621e2e6bdffd01d",
+  "baseline_tree": "4fff60797ead7534bd54c3271a244c057bc9ad33",
+  "behavior": {
+    "callbacks": false,
+    "executable": false,
+    "network_calls": false,
+    "telemetry": false
+  },
+  "canonical_url": "https://github.com/VolMax-Studio/battery-deposit-semantics-s1",
+  "default_branch_at_recording": "main",
+  "license": {
+    "detected_spdx": null,
+    "files": [],
+    "note": "This provenance record does not grant or alter license rights."
+  },
+  "owner": "VolMax-Studio",
+  "record_id": "urn:volmax:github:VolMax-Studio/battery-deposit-semantics-s1:d5d951bf9ffde2cf61859c99b621e2e6bdffd01d",
+  "record_type": "volmax.repository-provenance",
+  "record_version": 1,
+  "recorded_at": "2026-10-08T19:32:44+00:00",
+  "repository": "VolMax-Studio/battery-deposit-semantics-s1",
+  "schema": "urn:volmax:provenance:v1",
+  "scope": "Repository identity and baseline commit only; historical tags, releases, evidence, authorship, and existing file bytes are unchanged."
+}
